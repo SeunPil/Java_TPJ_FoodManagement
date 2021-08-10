@@ -243,7 +243,14 @@ public class TPJ_Food {
 //                            System.out.println("없는 이름입니다. 상호명을 다시 입력해주세요.");
 
                         case 3://매출관리
-                            System.out.println(Arrays.toString(menu[0]));
+                            //해당 점포의 메뉴 띄우기
+//                            System.out.println(Arrays.toString(menu[0]));
+                            String selectUser = "가";
+                            for (int i = 0; i < user.length; i++) {
+                                if(selectUser.equals(user[2][i])) {
+                                    System.out.println(Arrays.toString(menu[i]));
+                                }
+                            }
 
                             //menu[] -> 점주의 인덱스 찾아서 넣어야 함
 //                            int idx = -1;
