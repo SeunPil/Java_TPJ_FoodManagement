@@ -218,20 +218,21 @@ public class TPJ_Food {
                                     System.out.println("변경이 완료되었습니다.");
 
                                 }//end if
+//                                    System.out.println("없는 이름입니다. 상호명을 다시 입력해주세요.");
 
                             }//end for
-//                            System.out.println("없는 이름입니다. 상호명을 다시 입력해주세요.");
+                        default:
+                            System.out.println("다시 입력해주세요.");
 
-
-                    }//end switch
+                    }//end inner switch
 
                     break;
 
                 default:
                     System.out.println("다시 입력해주세요.");
                     break;
-            }//end switch
-            break;
+            }//end outer switch
+//            break;
         }//end while
 
 
