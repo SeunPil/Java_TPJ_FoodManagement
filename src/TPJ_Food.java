@@ -37,9 +37,16 @@ public class TPJ_Food {
 
         //판매개수 변수선언
         int sellNum = 0;
-        int priceNum = 0;
+        //판매된 메뉴가격변수선언
+        int sellMenuPrice = 0;
+
         //합산변수
         int total = 0;
+
+        //판매된 메뉴이름변수
+        String sellMenuName = "";
+
+
 
         //신규 음식점생성시 음식의 종류에 따른 배열//일단 사용 안함
         String[] kind = new String[4];
@@ -244,16 +251,12 @@ public class TPJ_Food {
 
                         case 3://매출관리
                             //해당 점포의 메뉴 띄우기
-//                            System.out.println(Arrays.toString(menu[0]));
                             String selectUser = "가";
                             for (int i = 0; i < user.length; i++) {
                                 if(selectUser.equals(user[2][i])) {
                                     System.out.println(Arrays.toString(menu[i]));
                                 }
                             }
-
-                            //menu[] -> 점주의 인덱스 찾아서 넣어야 함
-//                            int idx = -1;
 
                             System.out.println("판매된 목록을 입력해주세요");
                             String menuName = sc.next();
@@ -263,18 +266,19 @@ public class TPJ_Food {
                             for (int i = 0; i < menu.length; i++) {
                                 for (int j = 0; j < menu.length; j++) {
                                     if (menu[i][j].equals(menuName)) {
+                                        sellMenuName = menuName;
                                         System.out.println("개수를 입력해주세요.");
                                         sellNum = sc.nextInt();
-                                        priceNum = price[i][j];
+                                        sellMenuPrice = price[i][j];
                                     }
                                 }
                             }
 
-                            total += priceNum * sellNum;
-                            System.out.printf("판매수익: %d", total);
-                            break;
+                            total += sellMenuPrice * sellNum;
+                            System.out.printf("판매수익: %d\n", total);
 
                         case 4://정산관리
+                            System.out.printf("판매된 메뉴: %s : %d\n", sellMenuName, sellMenuPrice);
                             System.out.printf("오늘의 총 수익: %d", total);
                             break;
 
