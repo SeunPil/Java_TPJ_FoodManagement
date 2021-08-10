@@ -15,11 +15,31 @@ public class TPJ_Food {
 
         };
 
+        //메뉴배열 선언
+        String[][] menu = {
+                {"떡볶이", "오뎅", "김말이"},
+                {"짜장면", "짬뽕", "탕수육"},
+                {"파스타", "피자", "리조또"}
+        };
+
+        int[][] price = {
+                {3000, 2500, 2000},
+                {5000, 6000, 10000},
+                {10000, 20000, 10000}
+        };
+
         //재사용해야하는 변수목록 선언
         String newID = "";
         String newPW = "";
         String userName = "";
         String registration = "";
+
+
+        //판매개수 변수선언
+        int sellNum = 0;
+        int priceNum = 0;
+        //합산변수
+        int total = 0;
 
         //신규 음식점생성시 음식의 종류에 따른 배열//일단 사용 안함
         String[] kind = new String[4];
@@ -200,12 +220,12 @@ public class TPJ_Food {
                     System.out.print(">");
                     int rsNumber = sc.nextInt();
 
-                    //상호명 변경
+                    //가게관리
                     switch (rsNumber) {
                         case 0:
                             System.out.println("업무를 마칩니다.");
                             break;
-                        case 1:
+                        case 1://상호명 변경
                             System.out.println("현재 상호명을 입력하세요.");
                             String rsName = sc.next();
 
@@ -218,21 +238,48 @@ public class TPJ_Food {
                                     System.out.println("변경이 완료되었습니다.");
 
                                 }//end if
-//                                    System.out.println("없는 이름입니다. 상호명을 다시 입력해주세요.");
 
                             }//end for
-                        default:
-                            System.out.println("다시 입력해주세요.");
+//                            System.out.println("없는 이름입니다. 상호명을 다시 입력해주세요.");
 
-                    }//end inner switch
+                        case 3://매출관리
+                            System.out.println(Arrays.toString(menu[0]));
+
+                            //menu[] -> 점주의 인덱스 찾아서 넣어야 함
+//                            int idx = -1;
+
+                            System.out.println("판매된 목록을 입력해주세요");
+                            String menuName = sc.next();
+
+                            //합산목록
+                            //입력한 목록 찾기
+                            for (int i = 0; i < menu.length; i++) {
+                                for (int j = 0; j < menu.length; j++) {
+                                    if (menu[i][j].equals(menuName)) {
+                                        System.out.println("개수를 입력해주세요.");
+                                        sellNum = sc.nextInt();
+                                        priceNum = price[i][j];
+                                    }
+                                }
+                            }
+
+                            total += priceNum * sellNum;
+                            System.out.printf("판매수익: %d", total);
+                            break;
+
+                        case 4://정산관리
+                            System.out.printf("오늘의 총 수익: %d", total);
+                            break;
+
+                    }//end switch
 
                     break;
 
                 default:
                     System.out.println("다시 입력해주세요.");
                     break;
-            }//end outer switch
-//            break;
+            }//end switch
+            break;
         }//end while
 
 
