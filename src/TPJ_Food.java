@@ -245,6 +245,7 @@ public class TPJ_Food {
                 }//end inner for
             }//end outer for
             total += sellMenuPrice * sellNum;
+
             //0을 입력했을 시 총 수익과 함께 종료
             if (menuName.equals("0")) {
                 System.out.printf("%s 판매수익: %d\n", setTime1, total);
@@ -346,6 +347,8 @@ public class TPJ_Food {
                         case 3://매출관리
 
                             salesManagement(setTime1);
+                            continue;
+
                         case 4://정산관리
                             System.out.printf("판매된 메뉴: %s : %d\n", sellMenuName, sellMenuPrice);
                             System.out.printf("오늘의 총 수익: %d", total);
