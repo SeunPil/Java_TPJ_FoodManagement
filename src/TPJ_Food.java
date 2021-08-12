@@ -248,10 +248,10 @@ public class TPJ_Food {
 
             //0을 입력했을 시 총 수익과 함께 종료
             if (menuName.equals("0")) {
-                System.out.printf("%s 판매수익: %d\n", setTime1, total);
+                System.out.printf("%s %s %d인분 [%d원]\n", setTime1, sellMenuName, sellNum, total);
                 break;
             }
-            System.out.printf("%s 판매수익: %d\n", setTime1, total);
+            System.out.printf("%s %s %d인분 [%d원]\n", setTime1, sellMenuName, sellNum, total);
 
         }//end while
     }
@@ -350,7 +350,7 @@ public class TPJ_Food {
                             continue;
 
                         case 4://정산관리
-                            System.out.printf("판매된 메뉴: %s : %d\n", sellMenuName, sellMenuPrice);
+                            System.out.printf("%s %s %d인분 [%d원]\n", setTime1, sellMenuName, sellNum, total);
                             System.out.printf("오늘의 총 수익: %d", total);
                             break;
 
@@ -367,8 +367,6 @@ public class TPJ_Food {
 
 
     } // end main
-
-
 
 
 }//end class
