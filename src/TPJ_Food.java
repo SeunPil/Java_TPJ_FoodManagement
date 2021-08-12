@@ -278,8 +278,8 @@ public class TPJ_Food {
                     System.out.println("업무를 마치시려면 '0' 을 입력해주세요.");
                     System.out.println("");
                     System.out.println(Arrays.toString(menu[userInfor]));
-                }
-            }
+                }//end if
+            }//end for
 
             System.out.println("매출을 입력하실 음식을 입력해주세요.");
             System.out.print(">> ");
@@ -288,67 +288,79 @@ public class TPJ_Food {
 
             //합산목록
             //입력한 목록 찾기
-            for (int k = 0; k < menu.length; k++) {
-                for (int l = 0; l < menu.length; l++) {
-                    if (menu[k][l].equals(menuName)) {
-                        sellMenuName = menuName;
-                        System.out.println("판매하신 수량을 입력해주세요.");
-                        System.out.print(">> ");
-                        sellNum = sc.nextInt();
-                        sellMenuPrice = price[k][l];
 
-                        //만약 등록한 메뉴를 다시 등록할 경우
-                        boolean isAlreadySelled = false;
+            //잘못입력했을 때 false로 반환되는 논리타입변수
+            boolean corMenuName = false;
 
-                        for (int i = 0; i < sellMenuList.length; i++) {
-                            if(menuName.equals(sellMenuList[i])) {
-                                sellNumList[i] += sellMenuPrice * sellNum;
-                                isAlreadySelled = true;
-                            }
+            //잘못 입력했을 시
+            if (!corMenuName) {
+                if(!menuName.equals("0")) {
+                    System.out.println("\n다시 입력해주세요");
+                    continue;
+                }
+            }//end if
+
+            for (int l = 0; l < menu.length; l++) {
+                if (menu[userInfor][l].equals(menuName)) {
+                    sellMenuName = menuName;
+                    System.out.println("판매하신 수량을 입력해주세요.");
+                    System.out.print(">> ");
+                    sellNum = sc.nextInt();
+                    sellMenuPrice = price[userInfor][l];
+
+
+                    //만약 등록한 메뉴를 다시 등록할 경우
+                    boolean isAlreadySelled = false;
+
+                    for (int i = 0; i < sellMenuList.length; i++) {
+                        if (menuName.equals(sellMenuList[i])) {
+                            sellNumList[i] += sellMenuPrice * sellNum;
+                            isAlreadySelled = true;
                         }
+                    }
 
-                        if(!isAlreadySelled){
-                            //메뉴와 가격을 꽂기 위한 빈배열 생성
-                            String temp1[] = new String[sellMenuList.length+1];
-                            int temp2[] = new int[sellNumList.length+1];
+                    if (!isAlreadySelled) {
+                        //메뉴와 가격을 꽂기 위한 빈배열 생성
+                        String temp1[] = new String[sellMenuList.length + 1];
+                        int temp2[] = new int[sellNumList.length + 1];
 
-                            //메뉴이름배열과 가격배열에 꽂기
-                            for (int i = 0; i < sellNumList.length; i++) {
-                                temp1[i] = sellMenuList[i];
-                                temp2[i] = sellNumList[i];
-                            }
-                            temp1[temp1.length-1] = menuName;
-
-
-                            temp2[temp2.length-1] = sellNum * sellMenuPrice;
-                            //메뉴, 가격 배열에 빈배열 복사
-                            sellMenuList = temp1;
-                            sellNumList = temp2;
-
-                            temp1 = null;
-
-                            temp2 = null;
+                        //메뉴이름배열과 가격배열에 꽂기
+                        for (int i = 0; i < sellNumList.length; i++) {
+                            temp1[i] = sellMenuList[i];
+                            temp2[i] = sellNumList[i];
                         }
+                        temp1[temp1.length - 1] = menuName;
 
-                    }//end if
-                }//end inner for
+
+                        temp2[temp2.length - 1] = sellNum * sellMenuPrice;
+                        //메뉴, 가격 배열에 빈배열 복사
+                        sellMenuList = temp1;
+                        sellNumList = temp2;
+
+                        temp1 = null;
+                        temp2 = null;
+                    }//end inner for
+
+                }//end if
             }//end outer for
+
 
             //총수익
             total += sellMenuPrice * sellNum;
 
             //0을 입력했을 시 총 수익과 함께 종료
             if (menuName.equals("0")) {
+                corMenuName= true;
                 System.out.printf("%s\n", setTime1);
-
                 System.out.printf("현 시간 매출: %d\n", total);
                 break;
             }
-            System.out.printf("%s %d인분 [%d원]\n", sellMenuName, sellNum, sellNumList[sellNumList.length-1]);
-            System.out.printf("%s\n현 시간 매출: %d\n",  setTime1, total);
+            System.out.printf("%s %d인분 [%d원]\n", sellMenuName, sellNum, sellNumList[sellNumList.length - 1]);
+            System.out.printf("%s\n현 시간 매출: %d\n", setTime1, total);
+
         }//end while
 
-    }
+    }//end method
 
     public static void main(String[] args) {
 
@@ -437,8 +449,8 @@ public class TPJ_Food {
 
                                 for (int i = 0; i < sellMenuList.length; i++) {
 
-                                System.out.printf("판매된 메뉴: %s : %d\n", sellMenuList[i], sellNumList[i]);
-                                System.out.println("");
+                                    System.out.printf("판매된 메뉴: %s : %d\n", sellMenuList[i], sellNumList[i]);
+                                    System.out.println("");
                                 }
                                 System.out.printf("오늘의 총 수익: %d\n", total);
                                 break;
