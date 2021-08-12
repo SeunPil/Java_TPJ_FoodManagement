@@ -292,14 +292,6 @@ public class TPJ_Food {
             //잘못입력했을 때 false로 반환되는 논리타입변수
             boolean corMenuName = false;
 
-            //잘못 입력했을 시
-            if (!corMenuName) {
-                if(!menuName.equals("0")) {
-                    System.out.println("\n다시 입력해주세요");
-                    continue;
-                }
-            }//end if
-
             for (int l = 0; l < menu.length; l++) {
                 if (menu[userInfor][l].equals(menuName)) {
                     sellMenuName = menuName;
@@ -308,6 +300,7 @@ public class TPJ_Food {
                     sellNum = sc.nextInt();
                     sellMenuPrice = price[userInfor][l];
 
+                    corMenuName = true;
 
                     //만약 등록한 메뉴를 다시 등록할 경우
                     boolean isAlreadySelled = false;
@@ -331,7 +324,6 @@ public class TPJ_Food {
                         }
                         temp1[temp1.length - 1] = menuName;
 
-
                         temp2[temp2.length - 1] = sellNum * sellMenuPrice;
                         //메뉴, 가격 배열에 빈배열 복사
                         sellMenuList = temp1;
@@ -343,7 +335,13 @@ public class TPJ_Food {
 
                 }//end if
             }//end outer for
-
+            //잘못 입력했을 시
+            if (!corMenuName) {
+                if(!menuName.equals("0")) {
+                    System.out.println("\n다시 입력해주세요");
+                    continue;
+                }
+            }//end if
 
             //총수익
             total += sellMenuPrice * sellNum;
@@ -358,7 +356,9 @@ public class TPJ_Food {
             System.out.printf("%s %d인분 [%d원]\n", sellMenuName, sellNum, sellNumList[sellNumList.length - 1]);
             System.out.printf("%s\n현 시간 매출: %d\n", setTime1, total);
 
+
         }//end while
+
 
     }//end method
 
