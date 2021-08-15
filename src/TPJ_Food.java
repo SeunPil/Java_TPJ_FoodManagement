@@ -308,6 +308,7 @@ public class TPJ_Food {
         int i = 0;
         for (i = 0; i < temp1.length; i++) {
             temp1[i] = market[i];
+            idx = i;
         }
 
         temp1[idx] = newFoodMarket;
@@ -356,7 +357,6 @@ public class TPJ_Food {
                     System.out.println("");
                     sellMenuPrice = price[userInfor][l];
                     corMenuName = true;
-
 
                     //만약 등록한 메뉴를 다시 등록할 경우
                     boolean isAlreadySelled = false;
