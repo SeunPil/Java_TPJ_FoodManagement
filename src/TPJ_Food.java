@@ -58,6 +58,7 @@ public class TPJ_Food {
     static String[] sellMenuList = {};
     static int[] sellNumList = {};
 
+    //고정된 총합 변수
     static int sum = 0;
 
     // 고객 조회 idx
