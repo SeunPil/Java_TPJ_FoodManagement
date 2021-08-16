@@ -27,7 +27,7 @@ public class TPJ_Food {
 
     //신규음식점 등록배열
     // idx = user
-    static java.lang.String[] market = {" ", " ", " "};
+    static java.lang.String[] market = {"분식집", "중식집", "레스토랑"};
 
     //메뉴 목록
     static String[][] menu = {
@@ -157,7 +157,7 @@ public class TPJ_Food {
                 String NMN = sc.next();
                 int mi = 0;
                 boolean cm = false;
-                for (int f = 0; f < user.length; f++) {
+                for (int f = 0; f < user[0].length; f++) {
                     if (NMN.equals(menu[idx][f])) {
                         mi = f;
                         cm = true;
@@ -171,15 +171,16 @@ public class TPJ_Food {
                 int[][] temp1 = new int[user.length][user.length + 1];
                 String[][] temp2 = new String[user.length][user.length + 1];
 
-                for (int i = 0; i <= user.length; i++) {
-                    for (int j = 0; j <= user.length; j++) {
+                for (int i = 0; i < menu[userInfor].length; i++) {
+                    for (int j = 0; j < menu[userInfor].length; j++) {
                         temp1[i][j] = price[i][j];
                         temp2[i][j] = menu[i][j];
+                        idx = i;
                     }
                 }
 
-                temp2[idx][user.length] = NMN;
-                temp1[idx][user.length] = NMP;
+                temp2[menu[userInfor].length][idx] = NMN;
+                temp1[price[userInfor].length][idx] = NMP;
 
                 price = temp1;
                 menu = temp2;
@@ -303,10 +304,10 @@ public class TPJ_Food {
 
         }
 
-        System.out.println(Arrays.deepToString(user));
-        System.out.println(Arrays.toString(market));
-        System.out.println(Arrays.deepToString(menu));
-        System.out.println(Arrays.deepToString(price));
+//        System.out.println(Arrays.deepToString(user));
+//        System.out.println(Arrays.toString(market));
+//        System.out.println(Arrays.deepToString(menu));
+//        System.out.println(Arrays.deepToString(price));
 
     }
 
@@ -399,16 +400,14 @@ public class TPJ_Food {
         System.out.println("신규 음식점 이름을 입력해주세요.");
         String newFoodMarket = sc.next();
 
-        String[] temp1 = new String[user.length];
-
+        String[] temp1 = new String[market.length+1];
 
         int i = 0;
         for (i = 0; i < market.length; i++) {
             temp1[i] = market[i];
         }
 
-        temp1[idx] = newFoodMarket;
-        System.out.println(Arrays.toString(temp1));
+        temp1[temp1.length-1] = newFoodMarket;
         market = temp1;
         temp1 = null;
         System.out.println(Arrays.toString(market));
