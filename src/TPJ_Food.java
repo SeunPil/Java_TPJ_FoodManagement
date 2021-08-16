@@ -86,7 +86,7 @@ public class TPJ_Food {
 
         System.out.println("메뉴판 설정");
         System.out.println("1. 가격변경");
-        System.out.println("2. 매뉴이름 변경");
+        System.out.println("2. 메뉴이름 변경");
         System.out.println("3. 메뉴추가");
         select = sc.nextInt();
 
@@ -308,10 +308,10 @@ public class TPJ_Food {
 
         }
 
-//        System.out.println(Arrays.deepToString(user));
-//        System.out.println(Arrays.toString(market));
-//        System.out.println(Arrays.deepToString(menu));
-//        System.out.println(Arrays.deepToString(price));
+        System.out.println(Arrays.deepToString(user));
+        System.out.println(Arrays.toString(market));
+        System.out.println(Arrays.deepToString(menu));
+        System.out.println(Arrays.deepToString(price));
 
     }
 
