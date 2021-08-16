@@ -157,7 +157,7 @@ public class TPJ_Food {
                 String NMN = sc.next();
                 int mi = 0;
                 boolean cm = false;
-                for (int f = 0; f < user[0].length; f++) {
+                for (int f = 0; f < user.length; f++) {
                     if (NMN.equals(menu[idx][f])) {
                         mi = f;
                         cm = true;
@@ -179,8 +179,8 @@ public class TPJ_Food {
                     }
                 }
 
-                temp2[menu[userInfor].length][idx] = NMN;
-                temp1[price[userInfor].length][idx] = NMP;
+                temp2[idx][menu[userInfor].length] = NMN;
+                temp1[idx][price[userInfor].length] = NMP;
 
                 price = temp1;
                 menu = temp2;
