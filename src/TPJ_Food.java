@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class TPJ_Food {
 
-
     static Scanner sc = new Scanner(System.in);
 
     static Date date = new Date();
@@ -34,7 +33,7 @@ public class TPJ_Food {
     static String[][] menu = {
             {"떡볶이", "오뎅", "김말이"},
             {"짜장면", "짬뽕", "탕수육"},
-            {"파스타", "피자", "리조또"}
+            {"파스타", "피자", "리조또"},
     };
     //메뉴 가격
     static int[][] price = {
@@ -58,12 +57,11 @@ public class TPJ_Food {
     static String[] sellMenuList = {};
     static int[] sellNumList = {};
 
-    //고정된 총합 변수
-    static int sum = 0;
+    static int MI = 0;
+
 
     // 고객 조회 idx
     static int idx = 0;
-    static int idx2 = 0;
 
 
     //재사용 변수
@@ -71,6 +69,7 @@ public class TPJ_Food {
     static String newPW = "";
     static String registration = "";
     static boolean firstRegister = false;
+    private static int sum;
 
 //    ===================================================================================
 
@@ -81,44 +80,118 @@ public class TPJ_Food {
         int cmi = 0;
         int cmi2 = 0;
         boolean correct = false;
+        int select = 0;
+        String MN;
+        int CP;
 
-        while (true) {
-            System.out.println(Arrays.toString(menu[idx]));
-            System.out.println("수정할 메뉴 이름을 입력해주세요.");
-            System.out.print(">>>");
-            String menuName = sc.next();
+        System.out.println("메뉴판 설정");
+        System.out.println("1. 가격변경");
+        System.out.println("2. 매뉴이름 변경");
+        System.out.println("3. 메뉴추가");
+        select = sc.nextInt();
 
+        switch (select) {
+            case 1:
+                System.out.println(Arrays.toString(menu[idx]));
+                System.out.println(Arrays.toString(price[idx]));
+                System.out.println("가격을 변경할 메뉴를 입력해주세요.");
+                MN = sc.next();
 
-            for (int i = 0; i < menu.length; i++) {
-                for (int j = 0; j < menu.length; j++)
-                    if (menuName.equals(menu[i][j])) {
-                        cmi = i;
-                        cmi2 = j;
-                        correct = true;
+                for (int i = 0; i <= user.length; i++) {
+                    if (MN.equals(menu[idx][i])) {
+                        MI = i;
                         break;
                     }
+                }
 
-            }
-            if (!correct) {
-                System.out.println("메뉴목록에 메뉴가 등록되어 있지 않습니다.");
-                System.out.println("다시 입력해주세요.");
-                continue;
-            }
+                System.out.println("원래 가격 :" + price[idx][MI]);
+                System.out.println("변경할 가격을 입력하세요");
+                System.out.print(">> ");
+                CP = sc.nextInt();
+                System.out.println("");
 
-            if (correct) {
-                System.out.println("수정할 메뉴 이름을 입력해주세요.");
-                System.out.print(">>");
-                changeMenuname = sc.next();
+                price[idx][MI] = CP;
+                System.out.println(Arrays.toString(menu[idx]));
+                System.out.println(Arrays.toString(price[idx]));
+
+                System.out.println("수정된 가격 :" + price[idx][MI]);
+                break;
+            case 2:
+                while (true) {
+
+                    System.out.println(Arrays.toString(menu[idx]));
+                    System.out.println("수정할 메뉴 이름을 입력해주세요.");
+                    System.out.print(">>>");
+                    String menuName = sc.next();
+
+
+                    for (int i = 0; i < menu.length - 1; i++) {
+                        if (menuName.equals(menu[idx][i])) {
+                            cmi = idx;
+                            cmi2 = i;
+                            correct = true;
+                            break;
+                        }
+
+                    }
+                    if (!correct) {
+                        System.out.println("메뉴목록에 메뉴가 등록되어 있지 않습니다.");
+                        System.out.println("다시 입력해주세요.");
+                        continue;
+                    }
+
+                    if (correct) {
+                        System.out.println("수정할 메뉴 이름을 입력해주세요.");
+                        System.out.print(">>");
+                        changeMenuname = sc.next();
+                        break;
+
+                    }
+                }
+                menu[cmi][cmi2] = changeMenuname;
+                System.out.println(Arrays.toString(menu[idx]) + "으로 수정되었습니다.");
                 break;
 
-            }
+            case 3:
+                System.out.println("추가할 메뉴 이름을 입력하세요");
+                String NMN = sc.next();
+                int mi = 0;
+                boolean cm = false;
+                for (int f = 0; f < user.length; f++) {
+                    if (NMN.equals(menu[idx][f])) {
+                        mi = f;
+                        cm = true;
+                        break;
+                    }
+                }
+
+                System.out.println("추가 메뉴의 가격을 입력하세요");
+                int NMP = sc.nextInt();
+
+                int[][] temp1 = new int[user.length][user.length + 1];
+                String[][] temp2 = new String[user.length][user.length + 1];
+
+                for (int i = 0; i <= user.length; i++) {
+                    for (int j = 0; j <= user.length; j++) {
+                        temp1[i][j] = price[i][j];
+                        temp2[i][j] = menu[i][j];
+                    }
+                }
+
+                temp2[idx][user.length] = NMN;
+                temp1[idx][user.length] = NMP;
+
+                price = temp1;
+                menu = temp2;
+
+                temp1 = null;
+                temp2 = null;
+
+                System.out.println(Arrays.toString(menu[idx]));
+                System.out.println(Arrays.toString(price[idx]));
+
+
         }
-
-
-        menu[cmi][cmi2] = changeMenuname;
-
-
-        System.out.println(Arrays.toString(menu[idx]) + "으로 수정되었습니다.");
 
 
     }
@@ -126,23 +199,15 @@ public class TPJ_Food {
     static void changeName() {
         System.out.printf("%s 사장님의 상호명 [%s] 입니다.\n", user[2][idx], market[idx]);
         System.out.println("변경하실 상호명을 입력하세요.");
-        String[] temp = new String[user.length];
-        String marketName;
+
         String changemarketName;
         System.out.print(">>");
         changemarketName = sc.next();
-        int changeidx = 0;
-        for (int i = 0; i < market.length; i++) {
-            if (changemarketName.equals(market[idx])) {
-                changeidx = i;
-                break;
-            }
-        }
 
 
-        market[changeidx + 1] = changemarketName;
+        market[idx] = changemarketName;
 
-        System.out.println(Arrays.toString(market));
+        System.out.println(Arrays.toString(new String[]{market[idx]}) + "으로 수정됨");
 
 
     }
@@ -182,7 +247,7 @@ public class TPJ_Food {
         }
 
         if (passNum == 0) {
-            System.out.println("");
+
             System.out.println("사용하실 비밀번호를 입력해주세요.");
             System.out.print(">> ");
             String newPW = sc.next();
@@ -196,23 +261,53 @@ public class TPJ_Food {
             System.out.println("회원가입이 성공적으로 완료되었습니다!");
             firstRegister = true;
 
-            String temp[][] = new String[user.length + 1][user.length + 1];
-            for (int i = 0; i < user.length; i++) {
+            // 데이터를 옮기기 위한 임시 배열 생성
+            // user[0].length = 사장님의 id수 = 사장님의 현재 수 (1:1)
+            // 사장님이 추가되면 사장님 정보의 id, pw, 이름 배열, 메뉴베열, 가격배열 이 1칸 늘어나야 함 - menu[이부분][]
+            // menu[0][] 는 1번째 사장님의 메뉴들이기 때문에 사장님(식당)별 갯수가 다름
+            // 그러므로 각 사장님 별 메뉴와 가격의 칸을 늘릴수 없음
+
+            String temp[][] = new String[user.length][user[0].length + 1];
+            String temp1[][] = new String[user[0].length + 1][];
+            int[][] temp2 = new int[user[0].length + 1][];
+            for (int i = 0; i < user[0].length; i++) {
                 temp[0][i] = user[0][i];
                 temp[1][i] = user[1][i];
                 temp[2][i] = user[2][i];
+
+                //메뉴정보옮김
+                temp1[i] = menu[i];
+
+                //가격정보옮김
+                temp2[i] = price[i];
+
             }
 
-            temp[0][temp.length - 1] = newID;
-            temp[1][temp.length - 1] = newPW;
-            temp[2][temp.length - 1] = userName;
+            temp[0][temp[1].length - 1] = newID;
+            temp[1][temp[1].length - 1] = newPW;
+            temp[2][temp[1].length - 1] = userName;
+
+            temp1[temp1.length-1]= new String[]{"메뉴입력1","메뉴입력2","메뉴입력3"};
+
+            temp2[temp2.length-1] = new int[]{1000,1000,1000};
+
+
+            price = temp2;
+            temp2 = null;
+
+            menu = temp1;
+            temp1 = null;
 
             user = temp;
             temp = null;
 
-            System.out.println(Arrays.toString(user[0]));
-            System.out.println(Arrays.toString(user[1]));
         }
+
+        System.out.println(Arrays.deepToString(user));
+        System.out.println(Arrays.toString(market));
+        System.out.println(Arrays.deepToString(menu));
+        System.out.println(Arrays.deepToString(price));
+
     }
 
     // menu 2 메세지
@@ -235,7 +330,7 @@ public class TPJ_Food {
             System.out.print("ID >> ");
             ID = sc.next();
             int passNum = 0;
-            for (int i = 0; i < user.length; i++) {
+            for (int i = 0; i < user[0].length; i++) {
                 if (user[0][i].equals(ID)) {
                     passNum = 1;
                     idx = i;
@@ -259,7 +354,7 @@ public class TPJ_Food {
                 System.out.println("비밀번호가 맞지않습니다.");
                 continue;
             }
-            for (int i = 0; i < user.length; i++) {
+            for (int i = 0; i < user[0].length; i++) {
                 if (user[1][i].equals(PW)) {
                     passPW = 1;
                     userInfor = i;
@@ -304,11 +399,12 @@ public class TPJ_Food {
         System.out.println("신규 음식점 이름을 입력해주세요.");
         String newFoodMarket = sc.next();
 
-        String[] temp1 = new String[market.length];
+        String[] temp1 = new String[user.length];
+
+
         int i = 0;
-        for (i = 0; i < temp1.length; i++) {
+        for (i = 0; i < market.length; i++) {
             temp1[i] = market[i];
-            idx = i;
         }
 
         temp1[idx] = newFoodMarket;
@@ -318,8 +414,8 @@ public class TPJ_Food {
         System.out.println(Arrays.toString(market));
         System.out.printf("%s 사장님의 %s 식당이 개업되었습니다.\n", user[2][idx], market[idx]);
         System.out.printf("사장님의 성공을 항상 기원합니다.\n");
-
     }
+
 
     //매출관리 메소드
     private static void salesManagement(String setTime1) {
@@ -327,10 +423,10 @@ public class TPJ_Food {
             //해당 점포의 메뉴 띄우기
             int total = 0;
             String selectUser = user[2][userInfor];
-            for (int j = 0; j < user.length; j++) {
+            for (int j = 0; j < user[0].length; j++) {
                 if (selectUser.equals(user[2][j])) {
                     System.out.println("");
-                    System.out.printf("%s 사장님 가게에 등록된 메뉴 목록입니다.\n", user[2][userInfor]);
+                    System.out.println("매출 입력을 시작합니다.");
                     System.out.println("업무를 마치시려면 '0' 을 입력해주세요.");
                     System.out.println("");
                     System.out.println(Arrays.toString(menu[userInfor]));
@@ -348,14 +444,14 @@ public class TPJ_Food {
             //잘못입력했을 때 false로 반환되는 논리타입변수
             boolean corMenuName = false;
 
-            for (int l = 0; l < menu.length; l++) {
+            for (int l = 0; l < menu[userInfor].length; l++) {
                 if (menu[userInfor][l].equals(menuName)) {
                     sellMenuName = menuName;
                     System.out.println("판매하신 수량을 입력해주세요.");
                     System.out.print(">> ");
                     sellNum = sc.nextInt();
-                    System.out.println("");
                     sellMenuPrice = price[userInfor][l];
+
                     corMenuName = true;
 
                     //만약 등록한 메뉴를 다시 등록할 경우
@@ -367,45 +463,38 @@ public class TPJ_Food {
                             isAlreadySelled = true;
                         }
                     }
-
                     if (!isAlreadySelled) {
                         //메뉴와 가격을 꽂기 위한 빈배열 생성
                         String temp1[] = new String[sellMenuList.length + 1];
                         int temp2[] = new int[sellNumList.length + 1];
-
                         //메뉴이름배열과 가격배열에 꽂기
                         for (int i = 0; i < sellNumList.length; i++) {
                             temp1[i] = sellMenuList[i];
                             temp2[i] = sellNumList[i];
                         }
                         temp1[temp1.length - 1] = menuName;
-
                         temp2[temp2.length - 1] = sellNum * sellMenuPrice;
                         //메뉴, 가격 배열에 빈배열 복사
                         sellMenuList = temp1;
                         sellNumList = temp2;
-
                         temp1 = null;
                         temp2 = null;
                     }//end inner for
-
                     System.out.println("===== ** 판매된 음식 목록 ** =====");
                     System.out.printf("%s\n", setTime1);
                     System.out.println("");
                     //총수익
                     for (int i = 0; i < sellNumList.length; i++) {
-                        idx2 = i;
                         System.out.printf("%s %d인분 [%s원]\n", sellMenuList[i], sellNum, sellNumList[i]);
                         total += sellNumList[i];
                         sum = total;
-
                     }
                     System.out.println("");
                     System.out.printf("총 판매 금액: %d\n", total);
                     System.out.println("");
                     System.out.println("===== ** 판매된 음식 목록 ** =====");
+                    break;
                 }//end if
-
             }//end outer for
             //잘못 입력했을 시
             if (!corMenuName) {
@@ -421,14 +510,13 @@ public class TPJ_Food {
                 System.out.printf("현 시간 매출: %d\n", sum);
                 break;
             }
-
         }//end while
     }//end method
 
     public static void main(String[] args) {
 
         //현재 시간
-        SimpleDateFormat timedata = new SimpleDateFormat("y.MM.dd a hh:mm:ss");
+        SimpleDateFormat timedata = new SimpleDateFormat("y.MM.dd a hh:mm:s");
         String setTime1 = timedata.format(date);
 
 
@@ -510,13 +598,11 @@ public class TPJ_Food {
                                 salesManagement(setTime1);
                                 continue;
                             case 4://정산관리
-
-                                for (int i = 0; i < sellMenuList.length; i++) {
-
-                                    System.out.printf("판매된 메뉴: %s : %d\n", sellMenuList[i], sellNumList[i]);
-                                    System.out.println("");
-                                }
-                                System.out.printf("오늘의 총 수익: %d\n", sum);
+                                System.out.println("");
+                                for (int i = 0; i < sellNumList.length; i++) {
+                                    System.out.printf("%s %d인분 [%s원]\n", sellMenuList[i], sellNum, sellNumList[i]);
+                                    total += sellNumList[i]; }
+                                System.out.println("오늘의 총 수입: "+total+"원");
                                 break;
 
                         }//end switch
@@ -532,4 +618,5 @@ public class TPJ_Food {
 
 
     } // end main
+
 }//end class
