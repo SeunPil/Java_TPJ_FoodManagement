@@ -88,7 +88,9 @@ public class TPJ_Food {
         System.out.println("1. 가격변경");
         System.out.println("2. 메뉴이름 변경");
         System.out.println("3. 메뉴추가");
+        System.out.print(">> ");
         select = sc.nextInt();
+        System.out.println("");
 
         switch (select) {
             case 1:
@@ -154,6 +156,7 @@ public class TPJ_Food {
 
             case 3:
                 System.out.println("추가할 메뉴 이름을 입력하세요");
+                System.out.print(">> ");
                 String NMN = sc.next();
                 int mi = 0;
                 boolean cm = false;
@@ -166,12 +169,14 @@ public class TPJ_Food {
                 }
 
                 System.out.println("추가 메뉴의 가격을 입력하세요");
+                System.out.print(">> ");
                 int NMP = sc.nextInt();
+                System.out.println("");
 
 //
 
-                int[][] temp1 = new int[user[0].length+1][price[userInfor].length +1];
-                String[][] temp2 = new String[user[0].length+1][menu[userInfor].length +1];
+                int[][] temp1 = new int[user[0].length + 1][price[userInfor].length + 1];
+                String[][] temp2 = new String[user[0].length + 1][menu[userInfor].length + 1];
 
                 for (int i = 0; i < menu.length; i++) {
                     for (int j = 0; j < menu[i].length; j++) {
@@ -192,8 +197,9 @@ public class TPJ_Food {
                 temp1 = null;
                 temp2 = null;
 
-                System.out.println(Arrays.toString(menu[idx]));
-                System.out.println(Arrays.toString(price[idx]));
+                System.out.println("메뉴 목록: " + Arrays.toString(menu[idx]));
+                System.out.println("메뉴 가격:" + Arrays.toString(price[idx]));
+                System.out.println("");
 
 
         }
@@ -292,7 +298,7 @@ public class TPJ_Food {
             temp[1][temp[1].length - 1] = newPW;
             temp[2][temp[1].length - 1] = userName;
 
-            temp1[temp1.length - 1] = new String[]{"메뉴입력1", "메뉴입력2", "메뉴입력3"};
+            temp1[temp1.length - 1] = new String[]{"기본메뉴1", "기본메뉴2", "기본메뉴3"};
 
             temp2[temp2.length - 1] = new int[]{1000, 1000, 1000};
 
@@ -308,10 +314,10 @@ public class TPJ_Food {
 
         }
 
-        System.out.println(Arrays.deepToString(user));
-        System.out.println(Arrays.toString(market));
-        System.out.println(Arrays.deepToString(menu));
-        System.out.println(Arrays.deepToString(price));
+//        System.out.println(Arrays.deepToString(user));
+//        System.out.println(Arrays.toString(market));
+//        System.out.println(Arrays.deepToString(menu));
+//        System.out.println(Arrays.deepToString(price));
 
     }
 
