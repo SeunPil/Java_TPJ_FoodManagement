@@ -308,10 +308,10 @@ public class TPJ_Food {
 
         }
 
-        System.out.println(Arrays.deepToString(user));
-        System.out.println(Arrays.toString(market));
-        System.out.println(Arrays.deepToString(menu));
-        System.out.println(Arrays.deepToString(price));
+//        System.out.println(Arrays.deepToString(user));
+//        System.out.println(Arrays.toString(market));
+//        System.out.println(Arrays.deepToString(menu));
+//        System.out.println(Arrays.deepToString(price));
 
     }
 
